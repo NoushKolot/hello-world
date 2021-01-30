@@ -1,8 +1,8 @@
 ---
 - hosts: all
-  
+  become: true
   tasks:
-   
+
   - name: stop if we have old docker container
     command: docker stop webapp-container
     ignore_errors: yes
@@ -12,7 +12,7 @@
     ignore_errors: yes
 
   - name: remove current docker image
-    command: docker rmi webapp-image 
+    command: docker rmi webapp-image
     ignore_errors: yes
 
   - name: building docker image
