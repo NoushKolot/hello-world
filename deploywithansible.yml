@@ -12,7 +12,7 @@
     ignore_errors: yes
 
   - name: remove current docker image
-    command: docker rmi webapp-image
+    command: docker rm webapp-image
     ignore_errors: yes
 
   - name: building docker image
