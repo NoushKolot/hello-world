@@ -2,7 +2,14 @@
 - hosts: all
   become: false
   tasks:
+  - name: stop if we have old docker container
+    command: docker stop webapp-container
+    ignore_errors: yes
 
+  - name: remove stopped docker container
+    command: docker rm webapp-container
+    ignore_errors: yes
+    
   - name: building docker image
     command: docker build -t webapp-image .
     args:
