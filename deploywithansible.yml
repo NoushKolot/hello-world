@@ -1,0 +1,12 @@
+---
+- hosts: all
+  
+  tasks:
+
+  - name: building docker image
+    command: docker build -t webapp-image .
+    args:
+      chdir: /home/ansadmin/deployment/
+
+  - name: creating docker container
+    command: docker run -d --name webapp-container -p 8080:8080 webapp-image
