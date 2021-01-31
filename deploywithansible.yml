@@ -2,6 +2,18 @@
 - hosts: all
   become: false
   tasks:
+  - name: copy docker file to host from ansible node
+    ansible.builtin.copy:
+      src: /home/ansadmin/deployment/Dockerfile
+      dest: /home/ansadmin/deployment/  # link to /path/to/file
+      follow: yes
+
+  - name: copy war file to host from ansible node
+    ansible.builtin.copy:
+      src: /home/ansadmin/deployment/webapp.war
+      dest: /home/ansadmin/deployment/  # link to /path/to/file
+      follow: yes
+
   - name: stop if we have old docker container
     command: docker stop webapp-container
     ignore_errors: yes
@@ -9,7 +21,7 @@
   - name: remove stopped docker container
     command: docker rm webapp-container
     ignore_errors: yes
-    
+
   - name: building docker image
     command: docker build -t webapp-image .
     args:
