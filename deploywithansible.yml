@@ -4,14 +4,14 @@
   tasks:
   - name: copy docker file to host from ansible node
     ansible.builtin.copy:
-      src: /home/ansadmin/deployment/Dockerfile
-      dest: /home/ansadmin/deployment/  # link to /path/to/file
+      src: /home/ansadmin/deploy/Dockerfile
+      dest: /home/ansadmin/deploy/  # link to /path/to/file
       follow: yes
 
   - name: copy war file to host from ansible node
     ansible.builtin.copy:
-      src: /home/ansadmin/deployment/webapp.war
-      dest: /home/ansadmin/deployment/  # link to /path/to/file
+      src: /home/ansadmin/deploy/webapp.war
+      dest: /home/ansadmin/deploy/  # link to /path/to/file
       follow: yes
 
   - name: stop if we have old docker container
@@ -25,7 +25,7 @@
   - name: building docker image
     command: docker build -t webapp-image .
     args:
-      chdir: /home/ansadmin/deployment/
+      chdir: /home/ansadmin/deploy/
 
   - name: creating docker container
     command: docker run -d --name webapp-container -p 8080:8080 webapp-image
